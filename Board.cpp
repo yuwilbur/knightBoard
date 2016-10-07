@@ -3,10 +3,9 @@
 
 Board::Board(const unsigned int width, const unsigned int height) :
   width_(width),
-  height_(height)
-{
-  cells_ = std::vector<std::vector<Cell::State>>(width_, std::vector<Cell::State>(height_, Cell::State::Free));
-}
+  height_(height),
+  cells_(std::vector<std::vector<Cell::State>>(width_, std::vector<Cell::State>(height_, Cell::State::Free)))
+{}
 
 Cell Board::Get(const size_t x, const size_t y) const {
   if (x >= width_)

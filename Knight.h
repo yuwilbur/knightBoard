@@ -7,5 +7,5 @@ class Knight :
 public:
   Knight() = default;
 
-  bool IsMoveValid(const Cell& start, const Cell& end) override;
+  bool IsMoveValid(const Cell& start, const Cell& end) const override;
 };

@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "Knight.h"
+#include "PathFinder.h"
 #include <iostream>
 
 int main() {
@@ -19,7 +20,15 @@ int main() {
     }
     std::cout << std::endl;
   }
-  
+
+  std::vector<Cell> path;
+  path.push_back(board.Get(2, 2));
+  path.push_back(board.Get(3, 4));
+  path.push_back(board.Get(2, 2));
+  path.push_back(board.Get(1, 0));
+
+  std::cout << PathFinder::IsSequenceValid(path, knight) << std::endl;
+
   std::cout << "END" << std::endl;
   system("pause");
   return 0;

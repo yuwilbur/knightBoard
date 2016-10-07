@@ -3,5 +3,5 @@
 
 class Piece {
 public:
-  virtual bool IsMoveValid(const Cell& start, const Cell& end) = 0;
+  virtual bool IsMoveValid(const Cell& start, const Cell& end) const = 0;
 };
