@@ -1,25 +1,17 @@
 #pragma once
 #include <vector>
+#include "Cell.h"
 
 class Board {
 public:
-  enum class Cell : char {
-    Free = 0, // Free
-    Water = 1, // Water
-    Rock = 2, // Rock
-    Barrier = 3, // Barrier
-    Teleport = 4, // Teleport
-    Lava = 5  // Lava
-  };
-
   Board(const unsigned int width, const unsigned int height);
 
-  std::vector<Cell>& operator[](const size_t x) { return cells_[x]; }
+  Cell Get(const size_t x, const size_t y) const;
   
-  void print();
+  void print() const;
 
 private:
   const unsigned int width_;
   const unsigned int height_;
-  std::vector<std::vector<Cell>> cells_;
+  std::vector<std::vector<Cell::State>> cells_;
 };
