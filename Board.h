@@ -7,6 +7,7 @@ public:
   Board(const unsigned int width, const unsigned int height);
 
   Cell Get(const size_t x, const size_t y) const;
+  void Set(const size_t x, const size_t y, const Cell::State state);
   
   void print() const;
 

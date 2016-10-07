@@ -9,11 +9,19 @@ Board::Board(const unsigned int width, const unsigned int height) :
 }
 
 Cell Board::Get(const size_t x, const size_t y) const {
-  if (x >= width_) 
+  if (x >= width_)
     throw std::out_of_range("X is out of range");
   if (y >= height_)
     throw std::out_of_range("Y is out of range");
   return Cell(x, y, cells_[x][y]);
+}
+
+void Board::Set(const size_t x, const size_t y, const Cell::State state) {
+  if (x >= width_)
+    throw std::out_of_range("X is out of range");
+  if (y >= height_)
+    throw std::out_of_range("Y is out of range");
+  cells_[x][y] = state;
 }
 
 void Board::print() const {
