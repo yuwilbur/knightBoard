@@ -71,7 +71,7 @@ void Level1() {
   path.push_back(Coord(3, 4));
   path.push_back(Coord(2, 2));
   path.push_back(Coord(1, 0));
-  std::cout << PathFinder::IsSequenceValid(path, knight) << std::endl;
+  std::cout << knight.IsSequenceValid(path) << std::endl;
   std::cout << std::endl;
 
   auto movesets = knight.GetMoveSet(Coord(1, 3));

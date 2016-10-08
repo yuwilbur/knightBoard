@@ -15,6 +15,12 @@ int Knight::GetDistance(const Coord& start, const Coord& end) const {
 bool Knight::IsMoveValid(const Coord& start, const Coord& end) const {
   if (!board_.IsValid(start) || !board_.IsValid(end))
     return false;
+
+  // Check if move is teleportation
+  if (board_[start] == Cell::Teleport && board_[end] == Cell::Teleport)
+    return true;
+
+  // Check if move is a valid knight move
   const Coord diff = end - start;
   const int x_dist = std::abs(diff.x);
   const int y_dist = std::abs(diff.y);
@@ -43,6 +49,7 @@ bool Knight::IsMoveValid(const Coord& start, const Coord& end) const {
     if (board_[cell] == Cell::Barrier)
       return false;
   }
+
   return true;
 }
 

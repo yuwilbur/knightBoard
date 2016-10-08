@@ -8,6 +8,8 @@ public:
   Piece(const Board& board) : board_(board) {};
   virtual ~Piece() = default;
 
+  bool IsSequenceValid(const std::vector<Coord>&) const;
+
   virtual int GetDistance(const Coord& start, const Coord& end) const = 0;
   virtual bool IsMoveValid(const Coord& start, const Coord& end) const = 0;
   virtual std::vector<Coord> GetMoveSet(const Coord& start) const = 0;
