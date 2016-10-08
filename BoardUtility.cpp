@@ -11,6 +11,7 @@ namespace BoardUtility {
       case Cell::Barrier: return 'B';
       case Cell::Teleport: return 'T';
       case Cell::Lava: return 'L';
+      case Cell::Knight: return 'K';
       default: throw std::invalid_argument("Cell type is not supported for print");
       }
     };

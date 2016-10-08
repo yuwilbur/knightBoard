@@ -14,4 +14,12 @@ struct Coord {
   bool operator!=(const Coord& coord) {
     return !(*this == coord);
   }
+
+  Coord operator-(const Coord& coord) const {
+    return Coord(x - coord.x, y - coord.y);
+  }
+
+  Coord operator+(const Coord& coord) const {
+    return Coord(x + coord.x, y + coord.y);
+  }
 };

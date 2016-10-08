@@ -8,5 +8,7 @@ enum class Cell : uint8_t {
   Rock = 2,
   Barrier = 3,
   Teleport = 4,
-  Lava = 5
+  Lava = 5,
+
+  Knight = 10
 };
