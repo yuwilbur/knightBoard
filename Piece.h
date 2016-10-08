@@ -1,7 +1,16 @@
 #pragma once
+#include "Board.h"
 #include "Cell.h"
+#include <vector>
 
 class Piece {
 public:
-  virtual bool IsMoveValid(const Cell& start, const Cell& end) const = 0;
+  Piece(const Board& board) : board_(board) {};
+  virtual ~Piece() = default;
+
+  virtual bool IsMoveValid(const Coord& start, const Coord& end) const = 0;
+  virtual std::vector<Coord> GetMoveSet(const Coord& start) const = 0;
+
+protected:
+  const Board& board_;
 };

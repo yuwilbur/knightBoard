@@ -5,7 +5,8 @@ class Knight :
   public Piece
 {
 public:
-  Knight() = default;
+  Knight(const Board& board) : Piece(board) {};
 
-  bool IsMoveValid(const Cell& start, const Cell& end) const override;
+  bool IsMoveValid(const Coord& start, const Coord& end) const override;
+  std::vector<Coord> GetMoveSet(const Coord& start) const override;
 };

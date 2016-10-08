@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="Coord.h" />
     <ClInclude Include="PathFinder.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="Piece.h" />
