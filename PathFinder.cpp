@@ -1,6 +1,8 @@
 #include "PathFinder.h"
+#include "BoardUtility.h"
 #include <queue>
-#include <unordered_map>
+#include <iostream>
+#include <limits>
 
 namespace PathFinder {
   bool IsSequenceValid(const std::vector<Coord>& path, const Piece& piece) {
@@ -17,25 +19,53 @@ namespace PathFinder {
   }
 
   std::vector<Coord> ComputePath(const Board<Cell>& board, const Piece& piece, const Coord& start, const Coord& end) {
-    //struct hash_Coord {
-    //  size_t operator()(const Coord& coord) const {
-    //    return std::hash<int>()(coord.x) ^ std::hash<int>()(coord.y);
-    //  }
-    //};
-    //std::unordered_map<Coord, size_t, hash_Coord> distances;
-    //distances.reserve(board.width * board.height);
-    //std::queue<Coord> moveQueue;
+    Board<Coord> prevCoord(board.width, board.height);
+    prevCoord.Fill(Coord(-1, -1));
+    Board<int> distances(board.width, board.height);
+    distances.Fill(0);
 
-    //auto addQueue = [&](const Coord& current) {
-    //  std::vector<Coord> moves = piece.GetMoveSet(current);
-    //  for (auto& move : moves) {
-    //    moveQueue.push(move);
-    //  }
-    //};
+    std::queue<Coord> moveQueue;
+    auto checkMove = [&](const Coord& source) -> bool {
+      std::vector<Coord> destinations = piece.GetMoveSet(source);
+      const int sourceDistance = distances[source];
+      for (auto& dest : destinations) {
+        const int destDistance = distances[dest];
+        const int newDistance = sourceDistance + piece.GetDistance(source, dest);
+        if (destDistance != 0 && destDistance <= newDistance)
+          continue;
+        prevCoord[dest] = source;
+        distances[dest] = newDistance;
+        if (dest == end) {
+          return true;
+        }
+        BoardUtility::print(distances);
+        moveQueue.push(dest);
+      }
+      return false;
+    };
 
-    //while (moveQueue.size() > 0) {
+    BoardUtility::print(distances);
+    moveQueue.push(start);
+    distances[start] = 1;
+    prevCoord[start] = start;
+
+    BoardUtility::print(distances);
+    while (moveQueue.size() > 0) {
+      if (checkMove(moveQueue.front()))
+        break;
+      moveQueue.pop();
+    }
+
+    // Unable to reach end
+    if (distances[end] == 0)
+      return{};
+
+    BoardUtility::print(prevCoord);
+
+    //for (Coord coord = end; !(coord == start); coord = prevCoord[end]) {
 
     //}
+
     return{};
   }
 }

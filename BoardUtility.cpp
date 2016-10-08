@@ -17,9 +17,31 @@ namespace BoardUtility {
 
     for (int y = 0; y < (int)board.height; ++y) {
       for (int x = 0; x < (int)board.width; ++x) {
-        std::cout << getLabel(board.At(Coord(x, y))) << " ";
+        std::cout << getLabel(board[Coord(x, y)]) << " ";
       }
       std::cout << std::endl;
     }
+    std::cout << std::endl;
+  }
+
+  void print(const Board<int>& board) {
+    for (int y = 0; y < (int)board.height; ++y) {
+      for (int x = 0; x < (int)board.width; ++x) {
+        std::cout << board[Coord(x, y)] << "\t";
+      }
+      std::cout << std::endl;
+    }
+    std::cout << std::endl;
+  }
+
+  void print(const Board<Coord>& board) {
+    for (int y = 0; y < (int)board.height; ++y) {
+      for (int x = 0; x < (int)board.width; ++x) {
+        const Coord coord = board[Coord(x, y)];
+        std::cout << coord.x << "," << coord.y << "\t";
+      }
+      std::cout << std::endl;
+    }
+    std::cout << std::endl;
   }
 }

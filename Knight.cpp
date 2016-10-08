@@ -2,7 +2,7 @@
 #include <cmath>
 
 int Knight::GetDistance(const Coord& start, const Coord& end) const {
-  return std::abs(start.x - end.x) + std::abs(start.y - end.y);
+  return 1;
 }
 
 bool Knight::IsMoveValid(const Coord& start, const Coord& end) const {

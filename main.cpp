@@ -8,6 +8,7 @@ int main() {
   std::cout << "START" << std::endl;
 
   Board<Cell> board(7, 7);
+  board.Fill(Cell::Free);
   BoardUtility::print(board);
   std::cout << std::endl;
   
@@ -35,6 +36,8 @@ int main() {
     std::cout << moveset.x << "," << moveset.y << std::endl;
   }
   std::cout << std::endl;
+
+  PathFinder::ComputePath(board, knight, Coord(2, 3), Coord(6, 5));
 
   std::cout << "END" << std::endl;
   system("pause");
