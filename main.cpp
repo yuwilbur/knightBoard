@@ -1,13 +1,14 @@
+#include "Grid.h"
 #include "Board.h"
-#include "BoardUtility.h"
+#include "GridUtility.h"
 #include "Knight.h"
 #include "PathFinder.h"
 #include <iostream>
 
 void Level1() {
-  Board<Cell> board(7, 7);
+  Board board(7, 7);
   board.Fill(Cell::Free);
-  BoardUtility::print(board);
+  GridUtility::print(board);
   std::cout << std::endl;
 
   Knight knight(board);
@@ -37,7 +38,7 @@ void Level1() {
 }
 
 void Level2() {
-  Board<Cell> board(7, 7);
+  Board board(7, 7);
   board.Fill(Cell::Free);
   Knight knight(board);
 
@@ -49,7 +50,7 @@ void Level2() {
 }
 
 void Level3() {
-  Board<Cell> board(7, 7);
+  Board board(7, 7);
   board.Fill(Cell::Free);
   Knight knight(board);
 
@@ -58,7 +59,7 @@ void Level3() {
       board[Coord(i, j)] = Cell::Rock;
     }
   }
-  BoardUtility::print(board);
+  GridUtility::print(board);
   std::cout << std::endl;
 
   auto test = PathFinder::ComputePath(board, knight, Coord(2, 3), Coord(4, 1));

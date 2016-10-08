@@ -24,14 +24,11 @@
     <ClCompile Include="PathFinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoardUtility.cpp">
+    <ClCompile Include="GridUtility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Knight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -47,7 +44,13 @@
     <ClInclude Include="Coord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoardUtility.h">
+    <ClInclude Include="GridUtility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

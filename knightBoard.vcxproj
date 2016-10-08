@@ -118,14 +118,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoardUtility.cpp" />
+    <ClCompile Include="GridUtility.cpp" />
     <ClCompile Include="PathFinder.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
-    <ClInclude Include="BoardUtility.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridUtility.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Coord.h" />
     <ClInclude Include="PathFinder.h" />

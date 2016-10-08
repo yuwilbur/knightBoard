@@ -4,7 +4,7 @@
 
 int Knight::GetDistance(const Coord& start, const Coord& end) const {
   if (!board_.IsValid(start) || !board_.IsValid(end))
-    throw std::invalid_argument("Board positions are invalid");
+    throw std::invalid_argument("Grid positions are invalid");
   switch (board_[end]) {
   case Cell::Water: return 2;
   case Cell::Lava: return 5;

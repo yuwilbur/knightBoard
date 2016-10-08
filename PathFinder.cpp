@@ -1,5 +1,5 @@
 #include "PathFinder.h"
-#include "BoardUtility.h"
+#include "GridUtility.h"
 #include <queue>
 #include <iostream>
 #include <limits>
@@ -8,7 +8,6 @@ namespace PathFinder {
   bool IsSequenceValid(const std::vector<Coord>& path, const Piece& piece) {
     if (path.size() < 2)
       throw std::invalid_argument("Path is too short. Cannot compute sequence");
-
     for (size_t i = 1; i < path.size(); ++i) {
       const Coord start = path[i - 1];
       const Coord end = path[i];
@@ -18,10 +17,10 @@ namespace PathFinder {
     return true;
   }
 
-  std::vector<Coord> ComputePath(const Board<Cell>& board, const Piece& piece, const Coord& start, const Coord& end) {
-    Board<Coord> prevCoord(board.width, board.height);
+  std::vector<Coord> ComputePath(const Board& board, const Piece& piece, const Coord& start, const Coord& end) {
+    Grid<Coord> prevCoord(board.width, board.height);
     prevCoord.Fill(Coord(-1, -1));
-    Board<int> distances(board.width, board.height);
+    Grid<int> distances(board.width, board.height);
     distances.Fill(0);
 
     std::queue<Coord> moveQueue;
@@ -35,6 +34,9 @@ namespace PathFinder {
           continue;
         prevCoord[dest] = source;
         distances[dest] = newDistance;
+        if (board[dest] == Cell::Teleport) {
+
+        }
         if (dest == end) {
           //return true;
         }
@@ -57,8 +59,8 @@ namespace PathFinder {
     if (distances[end] == 0)
       return{};
 
-    BoardUtility::print(distances);
-    BoardUtility::print(prevCoord);
+    GridUtility::print(distances);
+    GridUtility::print(prevCoord);
 
     std::vector<Coord> path;
     for (Coord coord = end; coord != start; coord = prevCoord[coord]) {
