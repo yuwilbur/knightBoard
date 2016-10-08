@@ -66,7 +66,6 @@ namespace PathFinder {
       return{};
 
     GridUtility::print(distances);
-    GridUtility::print(prevCoord);
 
     std::vector<Coord> path;
     for (Coord coord = end; coord != start; coord = prevCoord[coord]) {

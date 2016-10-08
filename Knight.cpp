@@ -29,20 +29,20 @@ bool Knight::IsMoveValid(const Coord& start, const Coord& end) const {
     return false;
 
   // Barrier quares cannot be used AND cannot lie in the path
-  //std::vector<Coord> path = {};
-  //if (y_dist > x_dist) {
-  //  path.push_back(Coord(start.x, start.y + diff.y / 2));
-  //  path.push_back(Coord(start.x, end.y));
-  //}
-  //else {
-  //  path.push_back(Coord(start.x + diff.x / 2, start.y));
-  //  path.push_back(Coord(end.x, start.y));
-  //}
-  //path.push_back(end);
-  //for (auto& cell : path) {
-  //  if (board_[cell] == Cell::Barrier)
-  //    return false;
-  //}
+  std::vector<Coord> path = {};
+  if (y_dist > x_dist) {
+    path.push_back(Coord(start.x, start.y + diff.y / 2));
+    path.push_back(Coord(start.x, end.y));
+  }
+  else {
+    path.push_back(Coord(start.x + diff.x / 2, start.y));
+    path.push_back(Coord(end.x, start.y));
+  }
+  path.push_back(end);
+  for (auto& cell : path) {
+    if (board_[cell] == Cell::Barrier)
+      return false;
+  }
   return true;
 }
 

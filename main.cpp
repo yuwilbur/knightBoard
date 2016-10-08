@@ -6,6 +6,49 @@
 
 #include <iostream>
 
+Board ConstructBoard() {
+  using namespace CellAbbreviations;
+  const std::vector<std::vector<Cell>> cells = {
+    { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, o, o, o, L, L, L, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, o, o, L, L, L, o, o, o, R, R, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, L, L, L, L, L, o, o, o, R, R, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, L, L, L, o, o, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, B, B, o, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, W, B, B, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, R, R, o, o, o, W, W, B, B, B, B, B, B, B, B, B, B, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, R, R, o, o, o, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, T, o, o, o, o, o },
+    { o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, o, o, o, o, B, o, o, R, R, o, o, o, o, o, o, o, o },
+    { o, o, o, W, W, o, o, o, o, o, o, o, o, o, o, B, B, B, B, B, o, o, R, R, o, W, W, W, W, W, W, W },
+    { o, o, o, W, W, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, W, o, o, o, o, o, o },
+    { W, W, W, W, o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, o },
+    { o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, B, B, B, B },
+    { o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, B, B, B, o, o, o, o, o, o, o, o, o, o, B, o, o, o },
+    { o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, o, o, B, W, W, W, W, W, W, B, B, B, B, B, o, o, o },
+    { o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, o, o, B, W, W, W, W, W, W, B, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, o, o, o, B, B, B, o, o, o, o, o, o, o, o, o, o, B, B, o, o, o, o, o, o },
+    { o, o, o, o, o, R, R, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o },
+    { o, o, o, o, o, R, R, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, o, B, o, T, o, o, o, o },
+    { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, R, R, o, o, o, o, o, o, B, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o }
+  };
+
+  Board board(32, 32);
+  for (size_t y = 0; y < cells.size(); ++y) {
+    for (size_t x = 0; x < cells[y].size(); ++x) {
+      board[Coord(x, y)] = cells[y][x];
+    }
+  }
+  board.ConstructTeleportEndpoints();
+  return board;
+}
+
 void Level1() {
   Board board(7, 7);
   board.Fill(Cell::Free);
@@ -55,7 +98,6 @@ void Level3() {
   board.Fill(Cell::Free);
   Knight knight(board);
 
-  board.SetTeleportEndpoints(Coord(1, 1), Coord(3, 4));
   for (int i = 0; i < 7; ++i) {
     for (int j = 4; j < 5; j++) {
       board[Coord(i, j)] = Cell::Rock;
@@ -72,7 +114,10 @@ void Level3() {
 }
 
 void Level4() {
-
+  Board board = ConstructBoard();
+  Knight knight(board);
+  GridUtility::print(board);
+  PathFinder::ComputePath(board, knight, Coord(1, 1), Coord(31, 31));
 }
 
 void Level5() {
@@ -93,8 +138,8 @@ void TestCoord() {
 int main() {
   //Level1();
   //Level2();
-  Level3();
-  //Level4();
+  //Level3();
+  Level4();
   //Level5();
   //TestCoord();
 

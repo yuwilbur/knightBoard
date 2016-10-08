@@ -10,7 +10,7 @@ class Board :
 public:
   Board(const unsigned int width, const unsigned int height) : Grid<Cell>(width, height) {};
 
-  void SetTeleportEndpoints(const Coord& ep1, const Coord& ep2);
+  void ConstructTeleportEndpoints();
   Coord GetTeleportEndpoint(const Coord& start) const;
 
 protected:
