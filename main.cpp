@@ -117,7 +117,7 @@ void Level4() {
   Board board = ConstructBoard();
   Knight knight(board);
   GridUtility::print(board);
-  PathFinder::ComputePath(board, knight, Coord(1, 1), Coord(31, 31));
+  PathFinder::ComputePath(board, knight, Coord(0, 0), Coord(31, 31));
 }
 
 void Level5() {

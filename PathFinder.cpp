@@ -21,7 +21,7 @@ namespace PathFinder {
     Grid<Coord> prevCoord(board.width, board.height);
     prevCoord.Fill(Coord(-1, -1));
     Grid<int> distances(board.width, board.height);
-    distances.Fill(0);
+    distances.Fill(-1);
 
     std::queue<Coord> moveQueue;
     auto checkMove = [&](const Coord& source) -> bool {
@@ -30,14 +30,14 @@ namespace PathFinder {
       for (auto& dest : destinations) {
         const int destDistance = distances[dest];
         const int newDistance = sourceDistance + piece.GetDistance(source, dest);
-        if (destDistance != 0 && destDistance <= newDistance)
+        if (destDistance != -1 && destDistance <= newDistance)
           continue;
         prevCoord[dest] = source;
         distances[dest] = newDistance;
         if (board[dest] == Cell::Teleport) {
           const Coord teleportDest = board.GetTeleportEndpoint(dest);
           const int endpointDistance = distances[teleportDest];
-          if (endpointDistance != 0 && endpointDistance <= newDistance)
+          if (endpointDistance != -1 && endpointDistance <= newDistance)
             continue;
           prevCoord[teleportDest] = dest;
           distances[teleportDest] = distances[dest];
@@ -52,7 +52,7 @@ namespace PathFinder {
     };
 
     moveQueue.push(start);
-    distances[start] = 1;
+    distances[start] = 0;
     prevCoord[start] = start;
 
     while (moveQueue.size() > 0) {
