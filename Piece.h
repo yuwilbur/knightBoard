@@ -9,6 +9,7 @@ public:
   virtual ~Piece() = default;
 
   bool IsSequenceValid(const std::vector<Coord>&) const;
+  std::vector<Coord> ComputeShortestPath(const Coord& start, const Coord& end) const;
 
   virtual int GetDistance(const Coord& start, const Coord& end) const = 0;
   virtual bool IsMoveValid(const Coord& start, const Coord& end) const = 0;

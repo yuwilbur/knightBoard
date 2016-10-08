@@ -120,7 +120,6 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="GridUtility.cpp" />
-    <ClCompile Include="PathFinder.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Piece.cpp" />
@@ -131,7 +130,6 @@
     <ClInclude Include="GridUtility.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Coord.h" />
-    <ClInclude Include="PathFinder.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="Piece.h" />
   </ItemGroup>
