@@ -35,7 +35,13 @@ namespace PathFinder {
         prevCoord[dest] = source;
         distances[dest] = newDistance;
         if (board[dest] == Cell::Teleport) {
-
+          const Coord teleportDest = board.GetTeleportEndpoint(dest);
+          const int endpointDistance = distances[teleportDest];
+          if (endpointDistance != 0 && endpointDistance <= newDistance)
+            continue;
+          prevCoord[teleportDest] = dest;
+          distances[teleportDest] = distances[dest];
+          moveQueue.push(teleportDest);
         }
         if (dest == end) {
           //return true;

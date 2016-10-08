@@ -1,39 +1,18 @@
 #include "Board.h"
-#include <iostream>
 
-Board::Board(const unsigned int width, const unsigned int height) :
-  width_(width),
-  height_(height),
-  cells_(std::vector<std::vector<Cell>>(width_, std::vector<Cell>(height_, Cell::Free)))
-{}
-
-Cell& Board::At(const Coord& coord) {
-  if (!IsValid(coord))
-    throw std::out_of_range("X or Y is out of range");
-  return cells_[coord.x][coord.y];
+void Board::SetTeleportEndpoints(const Coord& ep1, const Coord& ep2) {
+  if (teleport_.first.IsValid() && teleport_.second.IsValid())
+    throw std::runtime_error("Currently unable to support more than 1 teleport");
+  teleport_.first = Coord(ep1);
+  teleport_.second = Coord(ep2);
+  cells_[ep1.x][ep1.y] = Cell::Teleport;
+  cells_[ep2.x][ep2.y] = Cell::Teleport;
 }
 
-bool Board::IsValid(const Coord& coord) const {
-  return (coord.x < (int)width_ && coord.y < (int)height_);
-}
-
-void Board::print() const {
-  auto getLabel = [](const Cell& cell) -> char {
-    switch (cell) {
-    case Cell::Free: return '.';
-    case Cell::Water: return 'W';
-    case Cell::Rock: return 'R';
-    case Cell::Barrier: return 'B';
-    case Cell::Teleport: return 'T';
-    case Cell::Lava: return 'L';
-    default: throw std::invalid_argument("Cell type is not supported. Label will not be found");
-    }
-  };
-
-  for (size_t y = 0; y < height_; ++y) {
-    for (size_t x = 0; x < width_; ++x) {
-      std::cout << getLabel(cells_[x][y]) << " ";
-    }
-    std::cout << std::endl;
-  }
+Coord Board::GetTeleportEndpoint(const Coord& start) const {
+  if (teleport_.first == start)
+    return teleport_.second;
+  if (teleport_.second == start)
+    return teleport_.first;
+  throw std::invalid_argument("Coord is not an endpoint of the teleport");
 }

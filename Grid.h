@@ -27,7 +27,7 @@ public:
     return cells_[coord.x][coord.y];
   }
 
-  T& operator[](const Coord& coord) {
+  virtual T& operator[](const Coord& coord) {
     if (!IsValid(coord))
       throw std::out_of_range("X or Y is out of range");
     return cells_[coord.x][coord.y];
@@ -43,6 +43,6 @@ public:
   const unsigned int width;
   const unsigned int height;
 
-private:
+protected:
   std::vector<std::vector<T>> cells_;
 };

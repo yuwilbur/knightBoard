@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="GridUtility.cpp" />
     <ClCompile Include="PathFinder.cpp" />
     <ClCompile Include="Knight.cpp" />

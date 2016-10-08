@@ -3,6 +3,7 @@
 #include "GridUtility.h"
 #include "Knight.h"
 #include "PathFinder.h"
+
 #include <iostream>
 
 void Level1() {
@@ -54,6 +55,7 @@ void Level3() {
   board.Fill(Cell::Free);
   Knight knight(board);
 
+  board.SetTeleportEndpoints(Coord(1, 1), Coord(3, 4));
   for (int i = 0; i < 7; ++i) {
     for (int j = 4; j < 5; j++) {
       board[Coord(i, j)] = Cell::Rock;
