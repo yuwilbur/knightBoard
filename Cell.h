@@ -3,21 +3,32 @@
 #include <limits.h>
 
 enum class Cell : uint8_t {
-  Free = 0, // Free
-  Water = 1, // Water
-  Rock = 2, // Rock
-  Barrier = 3, // Barrier
-  Teleport = 4, // Teleport
-  Lava = 5, // Lava
+  // Basic States
+  Free = 0,
+  Start = 1,
+  End = 2,
 
-  Knight = 10 // Knight
+  // Obstacles
+  Water = 10,
+  Rock = 11,
+  Barrier = 12,
+  Teleport = 13,
+  Lava = 14,
+
+  // Pieces
+  Knight = 20
 };
 
 namespace CellAbbreviations {
   constexpr Cell o = Cell::Free;
+  constexpr Cell S = Cell::Start;
+  constexpr Cell E = Cell::End;
+
   constexpr Cell W = Cell::Water;
   constexpr Cell R = Cell::Rock;
   constexpr Cell B = Cell::Barrier;
   constexpr Cell T = Cell::Teleport;
   constexpr Cell L = Cell::Lava;
+
+  constexpr Cell K = Cell::Knight;
 }

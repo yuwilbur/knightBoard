@@ -90,6 +90,13 @@ void Level2() {
     std::cout << test[i].x << "," << test[i].y << " ";
   }
   std::cout << std::endl;
+
+  board[Coord(2, 1)] = Cell::Barrier;
+  std::cout << knight.IsMoveValid(Coord(1, 1), Coord(3, 2)) << std::endl;
+  std::cout << knight.IsMoveValid(Coord(0, 1), Coord(2, 2)) << std::endl;
+  std::cout << knight.IsMoveValid(Coord(0, 0), Coord(2, 1)) << std::endl;
+  std::cout << knight.IsMoveValid(Coord(0, 1), Coord(1, 3)) << std::endl;
+
 }
 
 void Level3() {

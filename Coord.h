@@ -26,4 +26,12 @@ struct Coord {
   Coord operator+(const Coord& coord) const {
     return Coord(x + coord.x, y + coord.y);
   }
+
+  Coord operator/(const int divisor) const {
+    return Coord(x / divisor, y / divisor);
+  }
+
+  Coord operator*(const int multiplier) const {
+    return Coord(x * multiplier, y * multiplier);
+  }
 };
