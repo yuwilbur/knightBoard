@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "BoardUtility.h"
 #include "Knight.h"
 #include "PathFinder.h"
 #include <iostream>
@@ -6,8 +7,8 @@
 int main() {
   std::cout << "START" << std::endl;
 
-  Board board(7, 7);
-  board.print();
+  Board<Cell> board(7, 7);
+  BoardUtility::print(board);
   std::cout << std::endl;
   
   Knight knight(board);

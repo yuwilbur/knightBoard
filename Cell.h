@@ -3,11 +3,10 @@
 #include <limits.h>
 
 enum class Cell : uint8_t {
-  Invalid = 0,
-  Free = 1,
-  Water = 2,
-  Rock = 3,
-  Barrier = 4,
-  Teleport = 5,
-  Lava = 6
+  Free = 0,
+  Water = 1,
+  Rock = 2,
+  Barrier = 3,
+  Teleport = 4,
+  Lava = 5
 };

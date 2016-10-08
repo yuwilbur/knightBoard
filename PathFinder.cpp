@@ -1,5 +1,6 @@
 #include "PathFinder.h"
 #include <queue>
+#include <unordered_map>
 
 namespace PathFinder {
   bool IsSequenceValid(const std::vector<Coord>& path, const Piece& piece) {
@@ -15,14 +16,19 @@ namespace PathFinder {
     return true;
   }
 
-  std::vector<Coord> ComputePath(Board board, const Piece& piece, const Coord& start, const Coord& end) {
-    //board.At(start.x, start.y, 0);
-    //std::queue<Cell> moveQueue;
+  std::vector<Coord> ComputePath(const Board<Cell>& board, const Piece& piece, const Coord& start, const Coord& end) {
+    //struct hash_Coord {
+    //  size_t operator()(const Coord& coord) const {
+    //    return std::hash<int>()(coord.x) ^ std::hash<int>()(coord.y);
+    //  }
+    //};
+    //std::unordered_map<Coord, size_t, hash_Coord> distances;
+    //distances.reserve(board.width * board.height);
+    //std::queue<Coord> moveQueue;
 
-    //auto addQueue = [&](const Cell& current) {
-    //  std::vector<Cell> moves = piece.GetMoveSet(current);
+    //auto addQueue = [&](const Coord& current) {
+    //  std::vector<Coord> moves = piece.GetMoveSet(current);
     //  for (auto& move : moves) {
-    //    board.SetDistance(move.x, move.y, move.distance + 1);
     //    moveQueue.push(move);
     //  }
     //};
@@ -30,7 +36,6 @@ namespace PathFinder {
     //while (moveQueue.size() > 0) {
 
     //}
-    //return moves;
     return{};
   }
 }
