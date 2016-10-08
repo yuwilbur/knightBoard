@@ -37,7 +37,11 @@ int main() {
   }
   std::cout << std::endl;
 
-  PathFinder::ComputePath(board, knight, Coord(2, 3), Coord(6, 5));
+  auto test = PathFinder::ComputePath(board, knight, Coord(2, 3), Coord(4, 1));
+  for (size_t i = 0; i < test.size(); ++i) {
+    std::cout << test[i].x << "," << test[i].y << " ";
+  }
+  std::cout << std::endl;
 
   std::cout << "END" << std::endl;
   system("pause");

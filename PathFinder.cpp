@@ -35,10 +35,10 @@ namespace PathFinder {
           continue;
         prevCoord[dest] = source;
         distances[dest] = newDistance;
+        BoardUtility::print(distances);
         if (dest == end) {
           return true;
         }
-        BoardUtility::print(distances);
         moveQueue.push(dest);
       }
       return false;
@@ -62,10 +62,11 @@ namespace PathFinder {
 
     BoardUtility::print(prevCoord);
 
-    //for (Coord coord = end; !(coord == start); coord = prevCoord[end]) {
-
-    //}
-
-    return{};
+    std::vector<Coord> path;
+    for (Coord coord = end; coord != start; coord = prevCoord[coord]) {
+      path.push_back(coord);
+    }
+    path.push_back(start);
+    return path;
   }
 }

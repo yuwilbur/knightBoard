@@ -10,4 +10,8 @@ struct Coord {
   bool operator==(const Coord& coord) {
     return (x == coord.x && y == coord.y);
   }
+
+  bool operator!=(const Coord& coord) {
+    return !(*this == coord);
+  }
 };
