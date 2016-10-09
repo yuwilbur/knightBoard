@@ -48,38 +48,21 @@ std::vector<Coord> Piece::ComputeShortestPath(const Coord& start, const Coord& e
   return result;
 }
 
-std::vector<Coord> Piece::ComputeLongestPath(const Coord& start, const Coord& end) const {
-  Grid<NodeBFS> paths(board_.width, board_.height);
-  const NodeBFS defaultNode = { Coord(), -1 };
-  paths.Fill(defaultNode);
+std::vector<Coord> Piece::ComputeLongestPath(const Coord& start, const Coord& end) {
+  Grid<NodeDFS> paths(board_.width, board_.height);
+  paths.Fill({Coord(), false, -1});
 
   std::queue<Coord> moveQueue;
   moveQueue.push(start);
+  paths[start].visited = true;
   paths[start].distance = 0;
 
-  int i = 0;
-  while (moveQueue.size() > 0) {
-    const Coord move = moveQueue.front();
-    if (i++ % 10000 == 0)
-      GridUtility::print(paths);
-    const std::vector<Coord> new_moves = ProcessMoveBFS(move, paths);
-    for (auto& new_move : new_moves) {
-      moveQueue.push(new_move);
-    }
-    moveQueue.pop();
-  }
-
+  longest_path_ = {};
+  longest_path_distance_ = 0;
+  ProcessMoveDFS(start, end, paths, 0);
   GridUtility::print(paths);
-
-  // Unable to reach the end
-  if (paths[end].parent == Coord())
-    return{};
-  std::vector<Coord> result = {};
-  for (Coord coord = end; coord != start; coord = paths[coord].parent) {
-    result.push_back(coord);
-  }
-  result.push_back(start);
-  return result;
+  std::cout << "END" << std::endl;
+  return longest_path_;
 }
 
 std::vector<Coord> Piece::ProcessMoveBFS(const Coord& start, Grid<NodeBFS>& paths) const {
@@ -102,4 +85,40 @@ std::vector<Coord> Piece::ProcessMoveBFS(const Coord& start, Grid<NodeBFS>& path
     }
   }
   return next_moves;
+}
+
+void Piece::ProcessMoveDFS(const Coord& src, const Coord& end, Grid<NodeDFS>& paths, const int parent_distance) {
+  if (src == end) {
+    if (longest_path_distance_ <= parent_distance)
+      return;
+    longest_path_distance_ = parent_distance;
+    longest_path_ = {};
+    for (Coord coord = end; coord != Coord(); coord = paths[coord].parent) {
+      longest_path_.push_back(coord);
+    }
+    return;
+  }
+
+  const std::vector<Coord> possible_moves = GetMoveSet(src);
+  for (auto& dest : possible_moves) {
+    if (paths[dest].visited)
+      continue;
+    const int distance = parent_distance + GetDistance(src, dest);
+    if (paths[dest].distance < distance) {
+      GridUtility::print(paths);
+    }
+    const int nodeDistance = std::max(paths[dest].distance, distance);
+    const NodeDFS node = { src, true, nodeDistance };
+    paths[dest] = node;
+    ProcessMoveDFS(dest, end, paths, distance);
+    paths[dest].visited = false;
+    //if (board_[dest] == Cell::Teleport) {
+    //  const Coord endpoint = board_.GetTeleportEndpoint(dest);
+    //  paths[endpoint] = node;
+    //  ProcessMoveDFS(endpoint, end, paths);
+    //  paths[endpoint].visited = false;
+    //}
+    //else {
+    //}
+  }
 }

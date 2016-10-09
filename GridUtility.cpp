@@ -34,4 +34,15 @@ namespace GridUtility {
     }
     std::cout << std::endl;
   }
+
+  void print(const Grid<NodeDFS>& board) {
+    for (int y = 0; y < (int)board.height; ++y) {
+      for (int x = 0; x < (int)board.width; ++x) {
+        //std::cout << ((board[Coord(x, y)].visited) ? "x" : ".");
+        std::cout << board[Coord(x, y)].distance << "\t";
+      }
+      std::cout << std::endl;
+    }
+    std::cout << std::endl;
+  }
 }

@@ -8,4 +8,5 @@
 namespace GridUtility {
   void print(const Board& board);
   void print(const Grid<NodeBFS>& board);
+  void print(const Grid<NodeDFS>& board);
 }

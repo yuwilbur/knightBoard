@@ -126,10 +126,9 @@ void Level4() {
 }
 
 void Level5() {
-
-  Board board = ConstructBoard();
+  Board board(5, 5);
   Knight knight(board);
-  knight.ComputeLongestPath(Coord(0, 0), Coord(31, 31));
+  knight.ComputeLongestPath(Coord(0, 0), Coord(3, 3));
 }
 
 void TestCoord() {
@@ -147,8 +146,8 @@ int main() {
   //Level1();
   //Level2();
   //Level3();
-  Level4();
-  //Level5();
+  //Level4();
+  Level5();
   //TestCoord();
 
   return 0;
