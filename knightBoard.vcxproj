@@ -131,6 +131,7 @@
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Coord.h" />
     <ClInclude Include="Knight.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Piece.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

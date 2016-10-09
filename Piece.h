@@ -1,8 +1,10 @@
 #pragma once
 #include "Board.h"
 #include "Cell.h"
+#include "Node.h"
 #include <vector>
 #include <utility>
+#include <functional>
 
 class Piece {
 public:
@@ -20,5 +22,5 @@ public:
 protected:
   const Board& board_;
 
-  std::vector<Coord> ProcessMove(const Coord& move, Grid<std::pair<Coord, int>>& paths) const;
+  std::vector<Coord> ProcessMove(const Coord& move, Grid<Node>& paths, const std::function<bool(int, int)>& pred = std::greater_equal<int>()) const;
 };
