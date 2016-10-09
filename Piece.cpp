@@ -50,12 +50,11 @@ std::vector<Coord> Piece::ComputeShortestPath(const Coord& start, const Coord& e
 
 std::vector<Coord> Piece::ComputeLongestPath(const Coord& start, const Coord& end) {
   Grid<NodeDFS> paths(board_.width, board_.height);
-  paths.Fill({Coord(), false, -1});
+  paths.Fill({Coord(), false});
 
   std::queue<Coord> moveQueue;
   moveQueue.push(start);
   paths[start].visited = true;
-  paths[start].distance = 0;
 
   longest_path_ = {};
   longest_path_distance_ = 0;
@@ -104,21 +103,18 @@ void Piece::ProcessMoveDFS(const Coord& src, const Coord& end, Grid<NodeDFS>& pa
     if (paths[dest].visited)
       continue;
     const int distance = parent_distance + GetDistance(src, dest);
-    if (paths[dest].distance < distance) {
-      GridUtility::print(paths);
-    }
-    const int nodeDistance = std::max(paths[dest].distance, distance);
-    const NodeDFS node = { src, true, nodeDistance };
+    const NodeDFS node = { src, true };
+    GridUtility::print(paths);
     paths[dest] = node;
-    ProcessMoveDFS(dest, end, paths, distance);
-    paths[dest].visited = false;
-    //if (board_[dest] == Cell::Teleport) {
-    //  const Coord endpoint = board_.GetTeleportEndpoint(dest);
-    //  paths[endpoint] = node;
-    //  ProcessMoveDFS(endpoint, end, paths);
-    //  paths[endpoint].visited = false;
-    //}
-    //else {
-    //}
+    if (board_[dest] == Cell::Teleport) {
+      const Coord endpoint = board_.GetTeleportEndpoint(dest);
+      paths[endpoint] = node;
+      ProcessMoveDFS(endpoint, end, paths, distance);
+      paths[endpoint].visited = false;
+    }
+    else {
+      ProcessMoveDFS(dest, end, paths, distance);
+      paths[dest].visited = false;
+    }
   }
 }

@@ -126,7 +126,7 @@ void Level4() {
 }
 
 void Level5() {
-  Board board(5, 5);
+  Board board(4, 4);
   Knight knight(board);
   knight.ComputeLongestPath(Coord(0, 0), Coord(3, 3));
 }

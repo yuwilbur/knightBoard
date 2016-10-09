@@ -13,5 +13,4 @@ struct NodeDFS {
   // the parent can also be defined as a coordinate on the grid instead of Node *
   Coord parent;
   bool visited;
-  int distance;
 };
