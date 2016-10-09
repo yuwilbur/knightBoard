@@ -122,7 +122,7 @@ void Level3() {
 void Level4() {
   Board board = ConstructBoard();
   Knight knight(board);
-  GridUtility::print(board);
+  //GridUtility::print(board);
   knight.ComputeShortestPath(Coord(0, 0), Coord(31, 31));
 }
 

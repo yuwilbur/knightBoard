@@ -67,7 +67,7 @@ std::vector<Coord> Knight::GetMoveSet(const Coord& start) const {
       return;
     if (!IsMoveValid(start, end))
       return;
-    moveset.push_back(end);
+    moveset.push_back((board_[end] == Cell::Teleport) ? board_.GetTeleportEndpoint(end) : end);
   };
 
   addMoveset(start + Coord(1, 2));

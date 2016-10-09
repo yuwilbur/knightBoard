@@ -1,4 +1,5 @@
 #pragma once
+#include  <iostream>
 
 struct Coord {
   Coord(const int x = -1, const int y = -1) :
@@ -33,5 +34,10 @@ struct Coord {
 
   Coord operator*(const int multiplier) const {
     return Coord(x * multiplier, y * multiplier);
+  }
+
+  friend std::ostream& operator<<(std::ostream& os, const Coord& coord) {
+    os << coord.x << "," << coord.y;
+    return os;
   }
 };

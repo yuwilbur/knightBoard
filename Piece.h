@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "Cell.h"
 #include <vector>
+#include <utility>
 
 class Piece {
 public:
@@ -10,6 +11,7 @@ public:
 
   bool IsSequenceValid(const std::vector<Coord>&) const;
   std::vector<Coord> ComputeShortestPath(const Coord& start, const Coord& end) const;
+  //std::vector<Coord> ComputeLongestPath(const Coord& start, const Coord& end) const;
 
   virtual bool IsMoveValid(const Coord& start, const Coord& end) const = 0;
   virtual int GetDistance(const Coord& start, const Coord& end) const = 0;
@@ -17,4 +19,6 @@ public:
 
 protected:
   const Board& board_;
+
+  std::vector<Coord> ProcessMove(const Coord& move, Grid<std::pair<Coord, int>>& paths) const;
 };
