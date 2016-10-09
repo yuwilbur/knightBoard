@@ -122,12 +122,14 @@ void Level3() {
 void Level4() {
   Board board = ConstructBoard();
   Knight knight(board);
-  //GridUtility::print(board);
   knight.ComputeShortestPath(Coord(0, 0), Coord(31, 31));
 }
 
 void Level5() {
 
+  Board board = ConstructBoard();
+  Knight knight(board);
+  knight.ComputeLongestPath(Coord(0, 0), Coord(31, 31));
 }
 
 void TestCoord() {
@@ -149,6 +151,5 @@ int main() {
   //Level5();
   //TestCoord();
 
-  system("pause");
   return 0;
 }
