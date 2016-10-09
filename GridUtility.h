@@ -7,5 +7,5 @@
 
 namespace GridUtility {
   void print(const Board& board);
-  void print(const Grid<Node>& board);
+  void print(const Grid<NodeBFS>& board);
 }

@@ -25,7 +25,7 @@ namespace GridUtility {
     std::cout << std::endl;
   }
 
-  void print(const Grid<Node>& board) {
+  void print(const Grid<NodeBFS>& board) {
     for (int y = 0; y < (int)board.height; ++y) {
       for (int x = 0; x < (int)board.width; ++x) {
         std::cout << board[Coord(x, y)].distance << "\t";

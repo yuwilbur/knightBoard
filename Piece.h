@@ -22,5 +22,5 @@ public:
 protected:
   const Board& board_;
 
-  std::vector<Coord> ProcessMove(const Coord& move, Grid<Node>& paths, const std::function<bool(int, int)>& pred = std::greater_equal<int>()) const;
+  std::vector<Coord> ProcessMoveBFS(const Coord& start, Grid<NodeBFS>& paths) const;
 };
