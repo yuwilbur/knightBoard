@@ -1,6 +1,10 @@
 #include "Board.h"
 #include <iostream>
 
+void Board::Setup() {
+  ConstructTeleportEndpoints();
+}
+
 void Board::ConstructTeleportEndpoints() {
   if (teleport_.first.IsValid() && teleport_.second.IsValid())
     throw std::runtime_error("Currently unable to support more than 1 teleport");

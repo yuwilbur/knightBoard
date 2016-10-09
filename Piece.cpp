@@ -7,7 +7,7 @@
 bool Piece::IsSequenceValid(const std::vector<Coord>& path) const {
   if (path.size() < 2)
     throw std::invalid_argument("Path is too short. Cannot compute sequence");
-  for (size_t i = 0; i < path.size(); ++i) {
+  for (size_t i = 1; i < path.size(); ++i) {
     if (!IsMoveValid(path[i], path[i - 1]))
       return false;
   }
@@ -23,11 +23,8 @@ std::vector<Coord> Piece::ComputeShortestPath(const Coord& start, const Coord& e
   moveQueue.push(start);
   paths[start].distance = 0;
 
-  int i = 0;
   while (moveQueue.size() > 0) {
     const Coord move = moveQueue.front();
-    if (i++ % 1000 == 0)
-      GridUtility::print(paths);
     const std::vector<Coord> next_moves = ProcessMoveBFS(move, paths);
     for (auto& next_move: next_moves) {
       moveQueue.push(next_move);
@@ -38,6 +35,7 @@ std::vector<Coord> Piece::ComputeShortestPath(const Coord& start, const Coord& e
   GridUtility::print(paths);
 
   // Unable to reach the end
+  std::cout << end << std::endl;
   if (paths[end].parent == Coord())
     return{};
   std::vector<Coord> result = {};
@@ -59,8 +57,6 @@ std::vector<Coord> Piece::ComputeLongestPath(const Coord& start, const Coord& en
   longest_path_ = {};
   longest_path_distance_ = 0;
   ProcessMoveDFS(start, end, paths, 0);
-  GridUtility::print(paths);
-  std::cout << "END" << std::endl;
   return longest_path_;
 }
 

@@ -10,9 +10,11 @@ class Board :
 public:
   Board(const unsigned int width, const unsigned int height) : Grid<Cell>(width, height) {};
 
-  void ConstructTeleportEndpoints();
+  void Setup();
   Coord GetTeleportEndpoint(const Coord& start) const;
 
 protected:
   std::pair<Coord, Coord> teleport_;
+
+  void ConstructTeleportEndpoints();
 };
