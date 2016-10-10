@@ -16,6 +16,16 @@ Board ConstructBoard(const std::vector<std::vector<Cell>>& cells) {
   return board;
 }
 
+Board ConstructVeryEasyBoard() {
+  using namespace CellAbbreviations;
+  const std::vector<std::vector<Cell>> cells = {
+    { o, o, S, o, o },
+    { o, o, o, o, o },
+    { E, o, o, o, o }
+  };
+  return ConstructBoard(cells);
+}
+
 Board ConstructEasyBoard() {
   using namespace CellAbbreviations;
   const std::vector<std::vector<Cell>> cells = {
@@ -142,20 +152,23 @@ void Level4() {
 }
 
 void Level5() {
-  //std::cout << "Level5" << std::endl;
-  ////  Compute the longest sequence of moves to complete Level 3 without
-  ////  visiting the same square twice.Use the 32x32 board.
+  std::cout << "Level5" << std::endl;
+  //  Compute the longest sequence of moves to complete Level 3 without
+  //  visiting the same square twice.Use the 32x32 board.
 
-  //Board board(4, 4);
-  //Knight knight(board);
-  //knight.ComputeLongestPath(Coord(0, 0), Coord(3, 3));
+  Game game(ConstructVeryEasyBoard());
+  std::shared_ptr<Knight> knight = game.GetKnight();
+
+  auto path = game.LongestPathToEnd(knight);
+  game.PrintBoard();
+  game.Move(knight, path, true);
 }
 
 int main() {
-  Level1();
-  Level2();
-  Level3();
-  Level4();
-  //Level5();
+  //Level1();
+  //Level2();
+  //Level3();
+  //Level4();
+  Level5();
   return 0;
 }

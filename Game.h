@@ -16,6 +16,7 @@ public:
   std::vector<Coord> ShortestPathToEnd(const std::shared_ptr<Piece>& piece) const;
   std::vector<Coord> ShortestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const;
 
+  std::vector<Coord> LongestPathToEnd(const std::shared_ptr<Piece>& piece) const;
   std::vector<Coord> LongestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const;
 
 private:

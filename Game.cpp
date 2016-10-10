@@ -67,11 +67,64 @@ std::vector<Coord> Game::ShortestPath(const std::shared_ptr<Piece>& piece, const
   std::vector<Coord> result = {};
   for (Coord coord = target; coord != start; coord = paths[coord].parent) {
     result.push_back(coord);
-  } 
+  }
   std::reverse(result.begin(), result.end());
   return result;
 }
 
+std::vector<Coord> Game::LongestPathToEnd(const std::shared_ptr<Piece>& piece) const {
+  return LongestPath(piece, board_.GetEnd());
+}
+
+std::vector<Coord> Game::LongestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const {
+  Grid<NodeDFS> paths(board_.width, board_.height);
+  paths.Fill({ Coord(), false });
+
+  std::queue<Coord> moveQueue;
+  const Coord start = piece->position;
+  moveQueue.push(start);
+  paths[start].visited = true;
+
+  std::vector<Coord> longest_path = {};
+  int longest_path_distance = 0;
+
+  std::function<void(const Coord&, const int)> longestPathRecursive;
+  longestPathRecursive = [&](const Coord& src, const int parent_distance) {
+    if (src == target) {
+      if (longest_path_distance >= parent_distance)
+        return;
+      longest_path_distance = parent_distance;
+      longest_path = {};
+      for (Coord coord = target; coord != start; coord = paths[coord].parent) {
+        longest_path.push_back(coord);
+      }
+      return;
+    }
+
+    const std::vector<Coord> possible_moves = GetMoveSet(piece, src);
+    for (auto& dst : possible_moves) {
+      if (paths[dst].visited)
+        continue;
+      const int distance = parent_distance + GetDistance(piece, src, dst);
+      const NodeDFS node = { src, true };
+      paths[dst] = node;
+      if (board_[dst] == Cell::Teleport) {
+        const Coord endpoint = board_.GetTeleportEndpoint(dst);
+        paths[endpoint] = node;
+        longestPathRecursive(endpoint, distance);
+        paths[endpoint].visited = false;
+      }
+      else {
+        longestPathRecursive(dst, distance);
+        paths[dst].visited = false;
+      }
+    }
+  };
+  longestPathRecursive(start, 0);
+
+  std::reverse(longest_path.begin(), longest_path.end());
+  return longest_path;
+}
 
 std::vector<Coord> Game::GetMoveSet(const std::shared_ptr<Piece>& piece, const Coord& start) const {
   return piece->GetMoveSet(start, board_);
@@ -84,56 +137,3 @@ int Game::GetDistance(const std::shared_ptr<Piece>& piece, const Coord& start, c
 void Game::PrintBoard() const {
   GridUtility::Print(board_, { std::make_pair(knight_->position, Cell::Knight) });
 }
-
-/*
-std::vector<Coord> Piece::ComputeLongestPath(const Coord& start, const Coord& end) {
-//  Grid<NodeDFS> paths(board_.width, board_.height);
-//  paths.Fill({Coord(), false});
-//
-//  std::queue<Coord> moveQueue;
-//  moveQueue.push(start);
-//  paths[start].visited = true;
-//
-//  longest_path_ = {};
-//  longest_path_distance_ = 0;
-//  ProcessMoveDFS(start, end, paths, 0);
-//  return longest_path_;
-//}
-//
-//std::vector<Coord> Piece::ProcessMoveBFS(const Coord& start, Grid<NodeBFS>& paths) const {
-
-return{};
-}
-
-void Piece::ProcessMoveDFS(const Coord& src, const Coord& end, Grid<NodeDFS>& paths, const int parent_distance) {
-//if (src == end) {
-//  if (longest_path_distance_ <= parent_distance)
-//    return;
-//  longest_path_distance_ = parent_distance;
-//  longest_path_ = {};
-//  for (Coord coord = end; coord != Coord(); coord = paths[coord].parent) {
-//    longest_path_.push_back(coord);
-//  }
-//  return;
-//}
-
-//const std::vector<Coord> possible_moves = GetMoveSet(src, Board(0, 0));
-//for (auto& dest : possible_moves) {
-//  if (paths[dest].visited)
-//    continue;
-//  const int distance = parent_distance + GetDistance(src, dest, Board(0, 0));
-//  const NodeDFS node = { src, true };
-//  GridUtility::print(paths);
-//  paths[dest] = node;
-//  if (board_[dest] == Cell::Teleport) {
-//    const Coord endpoint = board_.GetTeleportEndpoint(dest);
-//    paths[endpoint] = node;
-//    ProcessMoveDFS(endpoint, end, paths, distance);
-//    paths[endpoint].visited = false;
-//  }
-//  else {
-//    ProcessMoveDFS(dest, end, paths, distance);
-//    paths[dest].visited = false;
-//  }
-//}
-}*/
