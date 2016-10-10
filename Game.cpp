@@ -44,6 +44,9 @@ std::vector<Coord> Game::ShortestPath(const std::shared_ptr<Piece>& piece, const
       const int new_distance = paths[src].distance + GetDistance(piece, src, dst);
       if (old_distance != -1 && old_distance <= new_distance)
         continue;
+      const int closest_distance = paths[target].distance;
+      if (closest_distance != -1 && new_distance >= closest_distance)
+        continue;
       const NodeBFS node = { src, new_distance };
       paths[dst] = node;
       if (board_[dst] == Cell::Teleport) {
@@ -64,6 +67,7 @@ std::vector<Coord> Game::ShortestPath(const std::shared_ptr<Piece>& piece, const
   // Unable to reach the end
   if (paths[target].parent.IsNull())
     return{};
+
   std::vector<Coord> result = {};
   for (Coord coord = target; coord != start; coord = paths[coord].parent) {
     result.push_back(coord);
