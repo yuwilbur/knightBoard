@@ -42,7 +42,7 @@ Board ConstructHardBoard() {
     { o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, B, B, o, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, W, B, B, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o },
-    { o, o, o, R, R, o, o, o, W, W, B, B, B, B, B, B, B, B, B, B, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, R, R, o, o, o, W, W, B, B, B, B, B, B, B, B, B, B, o, o, o, o, o, S, o, o, o, o, o, o },
     { o, o, o, R, R, o, o, o, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, T, o, o, o, o, o },
     { o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o },
@@ -58,7 +58,7 @@ Board ConstructHardBoard() {
     { o, o, o, o, o, R, R, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o },
     { o, o, o, o, o, R, R, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, o, B, o, T, o, o, o, o },
     { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, R, R, o, o, o, o, o, o, B, o, o, o, o, o, o },
-    { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o, E, o, o, o },
     { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o }
   };
@@ -66,7 +66,7 @@ Board ConstructHardBoard() {
 }
 
 void Level1() {
-  std::cout << "Level1" << std::endl;
+  std::cout << "=== LEVEL 1 ===" << std::endl;
   // Write a function that accepts a sequence of moves and reports
   // whether the sequence contains only valid knight moves. It should also
   // optionally print the state of the knight board to the terminal as shown
@@ -99,55 +99,47 @@ void Level1() {
 }
 
 void Level2() {
-  //std::cout << "Level2" << std::endl;
-  //// Compute a valid sequence of moves from a given start point to a given end point.
+  std::cout << "=== LEVEL 2 ===" << std::endl;
+  // Compute a valid sequence of moves from a given start point to a given end point.
 
-  //Board board = ConstructEasyBoard();
-  //Knight knight(board);
+  Game game(ConstructEasyBoard());
+  std::shared_ptr<Knight> knight = game.GetKnight();
 
-  //auto test = knight.ComputeShortestPath(Coord(2, 3), Coord(4, 1));
-  //for (size_t i = 0; i < test.size(); ++i) {
-  //  std::cout << test[i].x << "," << test[i].y << " ";
-  //}
-  //std::cout << std::endl;
+  auto path = game.ShortestPathToEnd(knight);
+  game.PrintBoard();
+  game.Move(knight, path, true);
 }
 
 void Level3() {
-  //std::cout << "Level3" << std::endl;
-  ////  Compute a valid sequence of moves from a given start point to a
-  //// given end point in the fewest number of moves.
+  std::cout << "=== LEVEL 3 ===" << std::endl;
+  //  Compute a valid sequence of moves from a given start point to a
+  // given end point in the fewest number of moves.
 
-  //Board board = ConstructEasyBoard();
-  //Knight knight(board);
+  Game game(ConstructEasyBoard());
+  std::shared_ptr<Knight> knight = game.GetKnight();
 
-  //for (int i = 0; i < 7; ++i) {
-  //  for (int j = 4; j < 5; j++) {
-  //    board[Coord(i, j)] = Cell::Rock;
-  //  }
-  //}
-  //std::cout << std::endl;
-
-  //auto test = knight.ComputeShortestPath(Coord(2, 3), Coord(4, 1));
-  //for (size_t i = 0; i < test.size(); ++i) {
-  //  std::cout << test[i].x << "," << test[i].y << " ";
-  //}
-  //std::cout << std::endl;
+  auto path = game.ShortestPathToEnd(knight);
+  game.PrintBoard();
+  game.Move(knight, path, true);
 }
 
 void Level4() {
-  //std::cout << "Level4" << std::endl;
-  ////  Now repeat the Level 3 task for this 32x32 board. Also, modify
-  ////  your validator from Level 1 to check your solutions. This board has the
-  ////  following additional rules :
-  ////    1) W[ater] squares count as two moves when a piece lands there
-  ////    2) R[ock] squares cannot be used
-  ////    3) B[arrier] squares cannot be used AND cannot lie in the path
-  ////    4) T[eleport] squares instantly move you from one T to the other in the same move
-  ////    5) L[ava] squares count as five moves when a piece lands there
+  std::cout << "Level4" << std::endl;
+  //  Now repeat the Level 3 task for this 32x32 board. Also, modify
+  //  your validator from Level 1 to check your solutions. This board has the
+  //  following additional rules :
+  //    1) W[ater] squares count as two moves when a piece lands there
+  //    2) R[ock] squares cannot be used
+  //    3) B[arrier] squares cannot be used AND cannot lie in the path
+  //    4) T[eleport] squares instantly move you from one T to the other in the same move
+  //    5) L[ava] squares count as five moves when a piece lands there
 
-  //Board board = ConstructHardBoard();
-  //Knight knight(board);
-  //knight.ComputeShortestPath(Coord(0, 0), Coord(31, 31));
+  Game game(ConstructHardBoard());
+  std::shared_ptr<Knight> knight = game.GetKnight();
+
+  auto path = game.ShortestPathToEnd(knight);
+  game.PrintBoard();
+  game.Move(knight, path, true);
 }
 
 void Level5() {
