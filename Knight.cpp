@@ -6,7 +6,7 @@ bool Knight::IsMoveValid(const Coord& start, const Coord& end, const Board& boar
     return false;
 
   // Check if move is teleportation
-  if (board[start] == Cell::Teleport && board[end] == Cell::Teleport)
+  if (board[end] == Cell::Teleport)
     return true;
 
   // Check if move is a valid knight move
@@ -66,7 +66,7 @@ std::vector<Coord> Knight::GetMoveSet(const Coord& start, const Board& board) co
       return;
     if (!IsMoveValid(start, end, board))
       return;
-    moveset.push_back((board[end] == Cell::Teleport) ? board.GetTeleportEndpoint(end) : end);
+    moveset.push_back(end);
   };
 
   addMoveset(start + Coord(1, 2));

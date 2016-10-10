@@ -38,11 +38,11 @@ Board ConstructHardBoard() {
     { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, o, o, o, L, L, L, o, o, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, o, o, L, L, L, o, o, o, R, R, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, L, L, L, L, L, o, o, o, R, R, o, o, o, o, o, o, o },
-    { o, o, o, o, o, o, o, o, B, o, o, o, L, L, L, L, L, L, o, o, o, o, o, o, o, o, o, o, o, o, o, o },
+    { o, o, S, o, o, o, o, o, B, o, o, o, L, L, L, L, L, L, o, o, o, o, o, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, B, B, o, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, W, B, B, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o },
-    { o, o, o, R, R, o, o, o, W, W, B, B, B, B, B, B, B, B, B, B, o, o, o, o, o, S, o, o, o, o, o, o },
+    { o, o, o, R, R, o, o, o, W, W, B, B, B, B, B, B, B, B, B, B, o, o, o, o, o, o, o, E, o, o, o, o },
     { o, o, o, R, R, o, o, o, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, T, o, o, o, o, o },
     { o, o, o, W, W, W, W, W, W, W, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o },
@@ -58,7 +58,7 @@ Board ConstructHardBoard() {
     { o, o, o, o, o, R, R, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o },
     { o, o, o, o, o, R, R, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, o, o, o, B, o, T, o, o, o, o },
     { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, R, R, o, o, o, o, o, o, B, o, o, o, o, o, o },
-    { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o, E, o, o, o },
+    { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o },
     { o, o, o, o, o, o, o, o, o, o, o, B, o, o, o, o, o, o, o, o, o, o, R, R, o, o, o, o, o, o, o, o }
   };
@@ -73,7 +73,6 @@ void Level1() {
   // above after each move.The current position should be marked with a 'K'.
 
   Game game(ConstructEasyBoard());
-  game.PrintBoard();
   std::shared_ptr<Knight> knight = game.GetKnight();
 
   std::cout << "Testing Good Sequence" << std::endl;
@@ -157,6 +156,6 @@ int main() {
   Level2();
   Level3();
   Level4();
-  Level5();
+  //Level5();
   return 0;
 }

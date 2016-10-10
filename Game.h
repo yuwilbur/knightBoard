@@ -15,7 +15,6 @@ public:
   void Move(const std::shared_ptr<Piece>& piece, const std::vector<Coord>& path, const bool print_per_move = false) const;
   
   std::vector<Coord> ShortestPathToEnd(const std::shared_ptr<Piece>& piece) const;
-  
   std::vector<Coord> ShortestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const;
 
 protected:

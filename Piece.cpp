@@ -4,11 +4,6 @@
 #include <queue>
 #include <iostream>
 
-std::vector<Coord> Piece::ComputeShortestPath(const Coord& start, const Coord& end) const {
-
-  return{};
-}
-
 std::vector<Coord> Piece::ComputeLongestPath(const Coord& start, const Coord& end) {
 //  Grid<NodeDFS> paths(board_.width, board_.height);
 //  paths.Fill({Coord(), false});

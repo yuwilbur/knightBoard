@@ -60,8 +60,6 @@ std::vector<Coord> Game::ShortestPath(const std::shared_ptr<Piece>& piece, const
     moveQueue.pop();
   }
 
-
-
   // Unable to reach the end
   if (paths[target].parent == Coord())
     return{};
