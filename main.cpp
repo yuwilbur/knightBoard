@@ -15,31 +15,17 @@ Board ConstructBoard(const std::vector<std::vector<Cell>>& cells) {
   return board;
 }
 
-Board ConstructVeryEasyBoard() {
-  using namespace CellAbbreviations;
-  const std::vector<std::vector<Cell>> cells = {
-    { S, o, o, o, o },
-    { o, o, o, o, o },
-    { o, o, o, o, o },
-    { o, o, o, o, o },
-    { o, o, o, o, o },
-    { o, o, o, o, o },
-    { o, o, o, E, o },
-    { o, o, o, o, o }
-  };
-  return ConstructBoard(cells);
-}
-
 Board ConstructEasyBoard() {
   using namespace CellAbbreviations;
   const std::vector<std::vector<Cell>> cells = {
-    { o, o, o, o, o, o, o },
-    { o, o, o, o, o, o, o },
-    { o, S, o, o, o, o, o },
-    { o, o, o, o, o, o, o },
-    { o, o, o, o, E, o, o },
-    { o, o, o, o, o, o, o },
-    { o, o, o, o, o, o, o }
+    { o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o },
+    { o, S, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, E, o, o },
+    { o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o },
+    { o, o, o, o, o, o, o, o }
   };
   return ConstructBoard(cells);
 }
@@ -160,7 +146,8 @@ void Level5() {
   //  Compute the longest sequence of moves to complete Level 3 without
   //  visiting the same square twice.Use the 32x32 board.
 
-  Game game(ConstructVeryEasyBoard());
+  Board board = (ConstructEasyBoard().SubBoard(Coord(1, 2), 5, 5));
+  Game game(board);
   std::shared_ptr<Knight> knight = game.GetKnight();
 
   auto path = game.LongestPathToEnd(knight);

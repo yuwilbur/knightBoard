@@ -77,9 +77,15 @@ std::vector<Coord> Game::LongestPathToEnd(const std::shared_ptr<Piece>& piece) c
 }
 
 std::vector<Coord> Game::LongestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const {
-  // TODO (wyu): Divide the entire board into analyzable sections:
-  // 8x8, 5x5, etc. (Following this paper: http://www.fq.math.ca/Scanned/16-3/cull.pdf)
-  // Use Warnsdorf's rule to find longest path in each sub-section
+  // This is akin to the travelling salesman's problem
+  // Brute-force would result in a O(8^N) (N = width * height) performance
+  // TODO (wyu): 
+  // Divide the entire board into analyzable sections: 8x8, 5x5, etc. 
+  // A list of cached 5x5, 5x6, 5x7, 8x8 solutions are required that starts at corner, with end that can jump to another corner
+  // This requires architectural changes and refactors to support mini-boards, rotations, and board section analysis
+  // References:
+  //   http://www.fq.math.ca/Scanned/16-3/cull.pdf
+  //   http://larc.unt.edu/ian/pubs/algoknight.pdf
   struct Move {
     Coord coord;
     std::vector<Coord> next_moves;
@@ -147,7 +153,6 @@ std::vector<Coord> Game::LongestPath(const std::shared_ptr<Piece>& piece, const 
   longestPathRecursive(start, 0);
 
   std::reverse(longest_path.begin(), longest_path.end());
-  std::cout << longest_path_distance + 1 << std::endl;
   return longest_path;
 }
 
@@ -160,5 +165,7 @@ int Game::GetDistance(const std::shared_ptr<Piece>& piece, const Coord& start, c
 }
 
 void Game::PrintBoard() const {
+  if (knight_->position.IsNull())
+    throw std::runtime_error("Unable to find knight. Initialization might have failed");
   GridUtility::Print(board_, { std::make_pair(knight_->position, Cell::Knight) });
 }

@@ -12,6 +12,8 @@ public:
 
   void Setup();
 
+  Board SubBoard(const Coord& top_left, const unsigned int new_width, const unsigned int new_height) const;
+
   Coord GetStart() const { return start_; }
   Coord GetEnd() const { return end_; }
   Coord GetTeleportEndpoint(const Coord& endpoint) const;
