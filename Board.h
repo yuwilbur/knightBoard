@@ -11,10 +11,16 @@ public:
   Board(const unsigned int width, const unsigned int height) : Grid<Cell>(width, height) {};
 
   void Setup();
-  Coord GetTeleportEndpoint(const Coord& start) const;
+
+  Coord GetStart() const { return start_; }
+  Coord GetEnd() const { return end_; }
+  Coord GetTeleportEndpoint(const Coord& endpoint) const;
 
 protected:
+  Coord start_;
+  Coord end_;
   std::pair<Coord, Coord> teleport_;
 
+  void ConstructStartEndPoints();
   void ConstructTeleportEndpoints();
 };

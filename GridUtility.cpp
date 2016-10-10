@@ -2,10 +2,12 @@
 #include <iostream>
 
 namespace GridUtility {
-  void print(const Board& board) {
+  void Print(Board board, const std::vector<std::pair<Coord, Cell>>& extras) {
     auto getLabel = [](const Cell cell) -> char {
       switch (cell) {
       case Cell::Free: return '.';
+      case Cell::Start: return 'S';
+      case Cell::End: return 'E';
       case Cell::Water: return 'W';
       case Cell::Rock: return 'R';
       case Cell::Barrier: return 'B';
@@ -15,6 +17,10 @@ namespace GridUtility {
       default: throw std::invalid_argument("Cell type is not supported for print");
       }
     };
+
+    for (auto& extra : extras) {
+      board[extra.first] = extra.second;
+    }
 
     for (int y = 0; y < (int)board.height; ++y) {
       for (int x = 0; x < (int)board.width; ++x) {

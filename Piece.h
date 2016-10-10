@@ -7,20 +7,20 @@
 #include <functional>
 
 class Piece {
+  friend class Game;   
 public:
-  Piece(const Board& board) : board_(board) {};
+  Piece() = default;
   virtual ~Piece() = default;
 
-  bool IsSequenceValid(const std::vector<Coord>& path) const;
   std::vector<Coord> ComputeShortestPath(const Coord& start, const Coord& end) const;
   std::vector<Coord> ComputeLongestPath(const Coord& start, const Coord& end);
 
-  virtual bool IsMoveValid(const Coord& start, const Coord& end) const = 0;
-  virtual int GetDistance(const Coord& start, const Coord& end) const = 0;
-  virtual std::vector<Coord> GetMoveSet(const Coord& start) const = 0;
-
 protected:
-  const Board& board_;
+  Coord position;
+
+  virtual bool IsMoveValid(const Coord& start, const Coord& end, const Board& board) const = 0;
+  virtual int GetDistance(const Coord& start, const Coord& end, const Board& board) const = 0;
+  virtual std::vector<Coord> GetMoveSet(const Coord& start, const Board& board) const = 0;
 
   std::vector<Coord> ProcessMoveBFS(const Coord& start, Grid<NodeBFS>& paths) const;
   void ProcessMoveDFS(const Coord& src, const Coord& end, Grid<NodeDFS>& paths, int parent_distance);

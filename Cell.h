@@ -29,6 +29,4 @@ namespace CellAbbreviations {
   constexpr Cell B = Cell::Barrier;
   constexpr Cell T = Cell::Teleport;
   constexpr Cell L = Cell::Lava;
-
-  constexpr Cell K = Cell::Knight;
 }

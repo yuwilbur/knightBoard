@@ -5,9 +5,10 @@ class Knight :
   public Piece
 {
 public:
-  Knight(const Board& board) : Piece(board) {};
+  Knight() = default;
 
-  bool IsMoveValid(const Coord& start, const Coord& end) const override;
-  int GetDistance(const Coord& start, const Coord& end) const override;
-  std::vector<Coord> GetMoveSet(const Coord& start) const override;
+protected:
+  bool IsMoveValid(const Coord& start, const Coord& end, const Board& board) const override;
+  int GetDistance(const Coord& start, const Coord& end, const Board& board) const override;
+  std::vector<Coord> GetMoveSet(const Coord& start, const Board& board) const override;
 };

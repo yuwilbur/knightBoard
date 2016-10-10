@@ -6,7 +6,7 @@
 #include <utility>
 
 namespace GridUtility {
-  void print(const Board& board);
+  void Print(Board board, const std::vector<std::pair<Coord, Cell>>& extras = {});
   void print(const Grid<NodeBFS>& board);
   void print(const Grid<NodeDFS>& board);
 }

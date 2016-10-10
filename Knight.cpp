@@ -1,13 +1,12 @@
 #include "Knight.h"
 #include <cmath>
-#include <iostream>
 
-bool Knight::IsMoveValid(const Coord& start, const Coord& end) const {
-  if (!board_.IsValid(start) || !board_.IsValid(end))
+bool Knight::IsMoveValid(const Coord& start, const Coord& end, const Board& board) const {
+  if (!board.IsValid(start) || !board.IsValid(end))
     return false;
 
   // Check if move is teleportation
-  if (board_[start] == Cell::Teleport && board_[end] == Cell::Teleport)
+  if (board[start] == Cell::Teleport && board[end] == Cell::Teleport)
     return true;
 
   // Check if move is a valid knight move
@@ -21,7 +20,7 @@ bool Knight::IsMoveValid(const Coord& start, const Coord& end) const {
     return false;
 
   // Rock squares cannot be used
-  if (board_[end] == Cell::Rock)
+  if (board[end] == Cell::Rock)
     return false;
 
   // Barrier quares cannot be used AND cannot lie in the path
@@ -32,7 +31,7 @@ bool Knight::IsMoveValid(const Coord& start, const Coord& end) const {
   // K k    K .    K .
   // . k    k k    k .
   // . K    . K    k K
-  auto IsBarrier = [&](const Coord& coord) -> bool { return (board_[coord] == Cell::Barrier); };
+  auto IsBarrier = [&](const Coord& coord) -> bool { return (board[coord] == Cell::Barrier); };
   if (IsBarrier(end)) return false;
   const Coord majorAxis = diff / 2;
   const Coord minorAxis = diff - majorAxis;
@@ -46,28 +45,28 @@ bool Knight::IsMoveValid(const Coord& start, const Coord& end) const {
   return true;
 }
 
-int Knight::GetDistance(const Coord& start, const Coord& end) const {
-  if (!board_.IsValid(start) || !board_.IsValid(end))
+int Knight::GetDistance(const Coord& start, const Coord& end, const Board& board) const {
+  if (!board.IsValid(start) || !board.IsValid(end))
     throw std::invalid_argument("Grid coordinates are invalid");
   const int distance = 1;
-  switch (board_[end]) {
+  switch (board[end]) {
   case Cell::Water: return distance + 1; // Water counts as two moves when landed on
   case Cell::Lava: return distance + 4; // Lava counts as five moves when landed on
   default: return distance;
   }
 }
 
-std::vector<Coord> Knight::GetMoveSet(const Coord& start) const {
-  if (!board_.IsValid(start))
+std::vector<Coord> Knight::GetMoveSet(const Coord& start, const Board& board) const {
+  if (!board.IsValid(start))
     throw std::invalid_argument("Starting coordinate is invalid");
 
   std::vector<Coord> moveset;
   auto addMoveset = [&](const Coord& end) {
-    if (!board_.IsValid(end))
+    if (!board.IsValid(end))
       return;
-    if (!IsMoveValid(start, end))
+    if (!IsMoveValid(start, end, board))
       return;
-    moveset.push_back((board_[end] == Cell::Teleport) ? board_.GetTeleportEndpoint(end) : end);
+    moveset.push_back((board[end] == Cell::Teleport) ? board.GetTeleportEndpoint(end) : end);
   };
 
   addMoveset(start + Coord(1, 2));
