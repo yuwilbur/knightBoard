@@ -2,7 +2,6 @@
 #include "Board.h"
 #include "Knight.h"
 #include <memory>
-#include <unordered_map>
 
 class Game {
 public:
@@ -17,7 +16,9 @@ public:
   std::vector<Coord> ShortestPathToEnd(const std::shared_ptr<Piece>& piece) const;
   std::vector<Coord> ShortestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const;
 
-protected:
+  std::vector<Coord> LongestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const;
+
+private:
   Board board_;
   std::shared_ptr<Knight> knight_;
 

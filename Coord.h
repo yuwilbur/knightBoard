@@ -8,8 +8,8 @@ struct Coord {
   int x;
   int y;
 
-  bool IsValid() const {
-    return (x != -1 && y != -1);
+  bool IsNull() const {
+    return *this == Coord();
   }
 
   bool operator==(const Coord& coord) const {
