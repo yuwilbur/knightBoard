@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "Knight.h"
-
 #include <iostream>
 
 Board ConstructBoard(const std::vector<std::vector<Cell>>& cells) {
@@ -20,9 +19,12 @@ Board ConstructVeryEasyBoard() {
   using namespace CellAbbreviations;
   const std::vector<std::vector<Cell>> cells = {
     { S, o, o, o, o },
-    { o, E, o, o, o },
     { o, o, o, o, o },
     { o, o, o, o, o },
+    { o, o, o, o, o },
+    { o, o, o, o, o },
+    { o, o, o, o, o },
+    { o, o, o, E, o },
     { o, o, o, o, o }
   };
   return ConstructBoard(cells);

@@ -77,6 +77,9 @@ std::vector<Coord> Game::LongestPathToEnd(const std::shared_ptr<Piece>& piece) c
 }
 
 std::vector<Coord> Game::LongestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const {
+  // TODO (wyu): Divide the entire board into analyzable sections:
+  // 8x8, 5x5, etc. (Following this paper: http://www.fq.math.ca/Scanned/16-3/cull.pdf)
+  // Use Warnsdorf's rule to find longest path in each sub-section
   struct Move {
     Coord coord;
     std::vector<Coord> next_moves;
