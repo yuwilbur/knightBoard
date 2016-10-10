@@ -19,9 +19,11 @@ Board ConstructBoard(const std::vector<std::vector<Cell>>& cells) {
 Board ConstructVeryEasyBoard() {
   using namespace CellAbbreviations;
   const std::vector<std::vector<Cell>> cells = {
-    { o, o, S, o, o },
+    { S, o, o, o, o },
+    { o, E, o, o, o },
     { o, o, o, o, o },
-    { E, o, o, o, o }
+    { o, o, o, o, o },
+    { o, o, o, o, o }
   };
   return ConstructBoard(cells);
 }
@@ -165,10 +167,10 @@ void Level5() {
 }
 
 int main() {
-  //Level1();
-  //Level2();
-  //Level3();
-  //Level4();
+  Level1();
+  Level2();
+  Level3();
+  Level4();
   Level5();
   return 0;
 }

@@ -77,6 +77,15 @@ std::vector<Coord> Game::LongestPathToEnd(const std::shared_ptr<Piece>& piece) c
 }
 
 std::vector<Coord> Game::LongestPath(const std::shared_ptr<Piece>& piece, const Coord& target) const {
+  struct Move {
+    Coord coord;
+    std::vector<Coord> next_moves;
+
+    bool operator < (const Move& move) const {
+      return (next_moves.size() < move.next_moves.size());
+    }
+  };
+
   Grid<NodeDFS> paths(board_.width, board_.height);
   paths.Fill({ Coord(), false });
 
@@ -100,9 +109,17 @@ std::vector<Coord> Game::LongestPath(const std::shared_ptr<Piece>& piece, const 
       }
       return;
     }
-
+    
+    // Warnsdorf's rule
     const std::vector<Coord> possible_moves = GetMoveSet(piece, src);
-    for (auto& dst : possible_moves) {
+    std::vector<Move> possible_moves_sorted = {};
+    for (auto& move : possible_moves) {
+      possible_moves_sorted.push_back(Move{ move, GetMoveSet(piece, move) });
+    }
+    std::sort(possible_moves_sorted.begin(), possible_moves_sorted.end());
+
+    for (auto& possible_move : possible_moves_sorted) {
+      const Coord dst = possible_move.coord;
       if (paths[dst].visited)
         continue;
       const int distance = parent_distance + GetDistance(piece, src, dst);
@@ -118,11 +135,16 @@ std::vector<Coord> Game::LongestPath(const std::shared_ptr<Piece>& piece, const 
         longestPathRecursive(dst, distance);
         paths[dst].visited = false;
       }
+      // Path cannot be longer than the board's size. Maximum possible path achieved
+      if (longest_path.size() == board_.height * board_.width - 1) {
+        return;
+      }
     }
   };
   longestPathRecursive(start, 0);
 
   std::reverse(longest_path.begin(), longest_path.end());
+  std::cout << longest_path_distance + 1 << std::endl;
   return longest_path;
 }
 
